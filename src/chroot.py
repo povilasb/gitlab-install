@@ -62,3 +62,11 @@ class Chroot:
 	#
 	def install_pkgs(self, pkgs):
 		self.execute("apt-get", ["-y", "install"] + pkgs)
+
+
+	#
+	# Returns true inf the specified package is installed in the chrooted
+	# system.
+	#
+	def package_installed(self, pkg_name):
+		return self.execute("dpkg-query", ["-s", pkg_name]) == 0
