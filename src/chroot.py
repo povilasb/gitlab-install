@@ -6,6 +6,9 @@ import shutil
 from exceptions import Exception
 
 
+#
+# This class only works on Debian like systems.
+#
 class Chroot:
 	def __init__(self, path, suite, distro, arch, apt_repo = ""):
 		if len(path) < 1:
@@ -36,10 +39,11 @@ class Chroot:
 
 
 	#
-	# Executes the specified command inside chroot.
+	# Executes the specified command inside chroot. Returns whatever the
+	# executed command returns.
 	#
 	def execute(self, command, args):
-		subprocess.call(["chroot", self.path, command] + args)
+		return subprocess.call(["chroot", self.path, command] + args)
 
 
 	def add_apt_source(self, url, components):
